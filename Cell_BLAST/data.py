@@ -234,7 +234,7 @@ def select_vars(adata: ad.AnnData, var_names: typing.List[str]) -> ad.AnnData:
     """
     if adata.var_names.duplicated().any():
         raise ValueError("Variable names are not unique!")
-    new_var_names = np.setdiff1d(np.unique(var_names), adata.var_names)
+    new_var_names = np.setdiff1d(np.unique(var_names), adata.var_names.to_list())
     all_var_names = np.concatenate([adata.var_names.to_numpy(), new_var_names])
     if new_var_names.size > 0:  # pragma: no cover
         utils.logger.warning(
